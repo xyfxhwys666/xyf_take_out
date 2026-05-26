@@ -1,6 +1,7 @@
 package com.xyf.controller.admin;
 
 import com.xyf.constant.JwtClaimsConstant;
+import com.xyf.dto.EmployeeDTO;
 import com.xyf.dto.EmployeeLoginDTO;
 import com.xyf.entity.Employee;
 import com.xyf.properties.JwtProperties;
@@ -71,4 +72,13 @@ public class EmployeeController {
         return Result.success();
     }
 
+
+
+    /*新增员工*/
+    @PostMapping
+    public Result save(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("新增员工:{}", employeeDTO);
+        employeeService.save(employeeDTO);
+        return Result.success();
+    }
 }
