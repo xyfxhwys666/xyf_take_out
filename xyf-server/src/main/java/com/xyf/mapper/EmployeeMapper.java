@@ -1,5 +1,7 @@
 package com.xyf.mapper;
 
+import com.github.pagehelper.Page;
+import com.xyf.dto.EmployeePageQueryDTO;
 import com.xyf.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +25,14 @@ public interface EmployeeMapper {
             "VALUES "+
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     void insert(Employee employee);
+
+    /*分页查询*/
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /*根据主键动态修改属性*/
+    void update(Employee employee);
+
+    /*根据id查询员工*/
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }
