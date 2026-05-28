@@ -1,8 +1,10 @@
 package com.xyf.mapper;
 
 import com.github.pagehelper.Page;
+import com.xyf.annotation.AutoFill;
 import com.xyf.dto.EmployeePageQueryDTO;
 import com.xyf.entity.Employee;
+import com.xyf.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,12 +26,15 @@ public interface EmployeeMapper {
     @Insert("insert into employee(name, username, password, phone, sex, id_number, create_time, update_time, create_user, update_user) " +
             "VALUES "+
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser})")
+
+    @AutoFill(value = OperationType.INSERT)
     void insert(Employee employee);
 
     /*分页查询*/
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /*根据主键动态修改属性*/
+    @AutoFill(value = OperationType.UPDATE)
     void update(Employee employee);
 
     /*根据id查询员工*/

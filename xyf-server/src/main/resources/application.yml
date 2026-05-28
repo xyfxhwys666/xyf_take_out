@@ -8,10 +8,10 @@ spring:
     allow-circular-references: true
   datasource:
     druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/xyf_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: root
-      password: 1234
+      driver-class-name: ${xyf.datasource.driver-class-name}
+      url: jdbc:mysql://${xyf.datasource.host}:${xyf.datasource.port}/${xyf.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${xyf.datasource.username}
+      password: ${xyf.datasource.password}
 
 mybatis:
   #mapper配置文件
@@ -37,3 +37,9 @@ xyf:
     admin-ttl: 720000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
+  alioss:
+    endpoint: ${xyf.alioss.endpoint}
+    access-key-id: ${xyf.alioss.access-key-id}
+    access-key-secret: ${xyf.alioss.access-key-secret}
+    bucket-name: ${xyf.alioss.bucket-name}

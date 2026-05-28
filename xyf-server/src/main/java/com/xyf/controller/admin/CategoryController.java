@@ -6,8 +6,6 @@ import com.xyf.entity.Category;
 import com.xyf.result.PageResult;
 import com.xyf.result.Result;
 import com.xyf.service.CategoryService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
