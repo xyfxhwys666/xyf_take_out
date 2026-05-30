@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -88,11 +89,70 @@ public class DishServiceImpl implements DishService {
             //关联了套餐，不能删除
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
         }
-        for (Long id : ids) {
+
+
+/*        for (Long id : ids) {
             dishMapper.deleteById(id);
             dishFlavorMapper.deleteByDishId(id);
-        }
+        }*/
 
+        dishMapper.deleteByIds(ids);
+        dishFlavorMapper.deleteByDishIds(ids);
+    }
+
+    /**
+     * 根据id查询菜品和对应的口味数据
+     * @param id
+     * @return
+     */
+    @Override
+    public DishVO getByIdWithFlavor(Long id) {
+        //查询菜品数据
+        Dish dish = dishMapper.getById(id);
+        //查询口味数据
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish,dishVO);
+        dishVO.setFlavors(dishFlavors);
+        return dishVO;
+    }
+
+    @Override
+    public void updateWithFlavor(DishDTO dishDTO) {
+        //修改菜品数据
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO,dish);
+        dishMapper.update(dish);
+        //删除口味
+        List<Long> dishIds = new ArrayList<>();
+        dishIds.add(dishDTO.getId());
+        dishFlavorMapper.deleteByDishIds(dishIds);
+        //添加口味
+        List<DishFlavor> flavors = dishDTO.getFlavors();
+        if(flavors != null && !flavors.isEmpty()){
+            for (DishFlavor flavor : flavors) {
+                flavor.setDishId(dishDTO.getId());
+            }
+            dishFlavorMapper.insertBatch(flavors);
+        }
+        //添加口味
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<DishVO> list(Long categoryId) {
+        List<Dish> dishList = dishMapper.list(categoryId);
+        List<DishVO> dishVOList = new ArrayList<>();
+        for (Dish dish : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(dish, dishVO);
+            dishVOList.add(dishVO);
+        }
+        return dishVOList;
     }
 
 }

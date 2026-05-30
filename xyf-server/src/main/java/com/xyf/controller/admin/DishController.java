@@ -5,6 +5,7 @@ import com.xyf.dto.DishPageQueryDTO;
 import com.xyf.result.PageResult;
 import com.xyf.result.Result;
 import com.xyf.service.DishService;
+import com.xyf.vo.DishVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,34 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+
+    @GetMapping("/{id}")
+    public Result<DishVO> get(@PathVariable Long id){
+        log.info("查询菜品：{}", id);
+        DishVO dishVO = dishService.getByIdWithFlavor(id);
+        return Result.success(dishVO);
+    }
+
+
+    @PutMapping
+    public Result updateWithFlavor(@RequestBody DishDTO dishDTO) {
+        log.info("更新菜品：{}", dishDTO);
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/list")
+    public Result<List<DishVO>> list(Long categoryId){
+        log.info("根据分类id查询菜品：{}", categoryId);
+        List<DishVO> list = dishService.list(categoryId);
+        return Result.success(list);
+    }
+
+
 
 }

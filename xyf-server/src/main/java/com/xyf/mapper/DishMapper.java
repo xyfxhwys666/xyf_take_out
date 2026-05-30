@@ -6,9 +6,10 @@ import com.xyf.dto.DishPageQueryDTO;
 import com.xyf.entity.Dish;
 import com.xyf.enumeration.OperationType;
 import com.xyf.vo.DishVO;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -39,9 +40,32 @@ public interface DishMapper {
     Dish getById(Long id);
 
     /**
+     * 根据菜品id集合批量删除菜品数据
+     *
+     * @param ids
+     */
+    void deleteByIds(List<Long> ids);
+
+    /**
+     * 根据id修改菜品数据
+     *
+     * @param dish
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
+
+    /**
+     * 根据分类id查询菜品
+     *
+     * @param categoryId
+     * @return
+     */
+    List<Dish> list(Long categoryId);
+
+    /**
      * 根据id删除菜品数据
      * @param id
      */
-    @Delete("delete from dish where id =#{id}")
-    void deleteById(Long id);
+/*    @Delete("delete from dish where id =#{id}")
+    void deleteById(Long id);*/
 }

@@ -1,5 +1,11 @@
 package com.xyf.mapper;
 
+import com.github.pagehelper.Page;
+import com.xyf.annotation.AutoFill;
+import com.xyf.dto.SetmealPageQueryDTO;
+import com.xyf.entity.Setmeal;
+import com.xyf.enumeration.OperationType;
+import com.xyf.vo.SetmealVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,5 +19,43 @@ public interface SetmealMapper {
      */
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
+
+
+    /**
+     * 新增套餐
+     * @param setmeal
+     */
+    @AutoFill(value = OperationType.INSERT)
+    void insert(Setmeal setmeal);
+
+
+    /**
+     * 套餐分页查询
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     * 根据id查询套餐
+     * @param id
+     * @return
+     */
+    @Select("select * from setmeal where id = #{id}")
+    Setmeal getById(Long id);
+
+    /**
+     * 根据id删除套餐
+     * @param ids
+     */
+    void deleteByIds(java.util.List<Long> ids);
+
+    /**
+     * 修改套餐
+     * @param setmeal
+     */
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Setmeal setmeal);
+
 
 }

@@ -13,6 +13,13 @@ spring:
       username: ${xyf.datasource.username}
       password: ${xyf.datasource.password}
 
+  redis:
+    host: ${xyf.redis.host}
+    port: ${xyf.redis.port}
+    database: ${xyf.redis.database}
+
+
+
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
