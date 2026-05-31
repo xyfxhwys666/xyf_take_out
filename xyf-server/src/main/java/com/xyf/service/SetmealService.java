@@ -2,8 +2,12 @@ package com.xyf.service;
 
 import com.xyf.dto.SetmealDTO;
 import com.xyf.dto.SetmealPageQueryDTO;
+import com.xyf.entity.Setmeal;
 import com.xyf.result.PageResult;
+import com.xyf.vo.DishItemVO;
 import com.xyf.vo.SetmealVO;
+
+import java.util.List;
 
 public interface SetmealService {
 
@@ -45,6 +49,18 @@ public interface SetmealService {
      * @param id
      */
     void startOrStop(Integer status, Long id);
+    /**
+     * 条件查询
+     * @param setmeal
+     * @return
+     */
+    List<Setmeal> list(Setmeal setmeal);
 
+    /**
+     * 根据id查询菜品选项
+     * @param id
+     * @return
+     */
+    List<DishItemVO> getDishItemById(Long id);
 
 }

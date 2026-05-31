@@ -44,9 +44,17 @@ xyf:
     admin-ttl: 720000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
-
+    user-secret-key: xyf
+    user-ttl: 720000000
+    user-token-name: authentication
   alioss:
     endpoint: ${xyf.alioss.endpoint}
     access-key-id: ${xyf.alioss.access-key-id}
     access-key-secret: ${xyf.alioss.access-key-secret}
     bucket-name: ${xyf.alioss.bucket-name}
+
+  wechat:
+    appid: ${xyf.wechat.appid}
+    secret: ${xyf.wechat.secret}
+    user-secret-key: ${xyf.jwt.user-secret-key}
+    user-ttl: ${xyf.jwt.user-ttl}
