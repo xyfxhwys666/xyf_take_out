@@ -45,4 +45,15 @@ public class GlobalExceptionHandler {
             return Result.error(MessageConstant.UNKNOWN_ERROR);
         }
     }
+
+    /**
+     * 处理其他异常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler
+    public Result exceptionHandler(Exception ex){
+        log.error("异常信息：", ex);
+        return Result.error(MessageConstant.UNKNOWN_ERROR);
+    }
 }

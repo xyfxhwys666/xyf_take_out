@@ -67,10 +67,14 @@ public class OrederServiceImpl implements OrderService {
         BeanUtils.copyProperties(ordersSubmitDTO, orders);
         orders.setUserId(currentId);
         orders.setOrderTime(LocalDateTime.now());
-        orders.setStatus(Orders.PENDING_PAYMENT);
+        orders.setStatus(Orders.TO_BE_CONFIRMED); // 下单即支付，直接待接单
+        orders.setPayStatus(Orders.PAID); // 下单即支付
+        orders.setCheckoutTime(LocalDateTime.now()); // 设置结账时间
         orders.setNumber(String.valueOf(System.currentTimeMillis()));
         orders.setPhone(addressBook.getPhone());
         orders.setConsignee(addressBook.getConsignee());
+        orders.setAddress(addressBook.getDetail());
+        orders.setUserName(addressBook.getConsignee());
 
 
         orederMapper.insert(orders);

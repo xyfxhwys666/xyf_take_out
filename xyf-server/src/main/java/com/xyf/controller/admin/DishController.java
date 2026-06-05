@@ -67,8 +67,6 @@ public class DishController {
         DishVO dishVO = dishService.getByIdWithFlavor(id);
         return Result.success(dishVO);
     }
-
-
     @PutMapping
     public Result updateWithFlavor(@RequestBody DishDTO dishDTO) {
         log.info("更新菜品：{}", dishDTO);
@@ -89,8 +87,6 @@ public class DishController {
         List<DishVO> list = dishService.list(categoryId);
         return Result.success(list);
     }
-
-
     @PostMapping("/status/{status}")
     public Result startOrStop(@PathVariable Integer status, Long id){
         log.info("菜品起售停售：{}, {}", status, id);

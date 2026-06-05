@@ -28,7 +28,6 @@ public class ShoppingCartController {
         List<ShoppingCart> list = shoppingCartService.list();
         return Result.success(list);
     }
-
     /**
      * 添加购物车
      * @param shoppingCartDTO
@@ -40,7 +39,6 @@ public class ShoppingCartController {
         shoppingCartService.addShoppingCart(shoppingCartDTO);
         return Result.success();
     }
-
     /**
      * 清空购物车
      * @return
