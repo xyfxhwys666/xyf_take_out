@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: com.xyf.XyfTakeOutApplication
+Premain-Class: com.xyf.agent.PerformanceMonitorAgent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
