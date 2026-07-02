@@ -1,0 +1,60 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${xyf.datasource.driver-class-name}
+      url: jdbc:mysql://${xyf.datasource.host}:${xyf.datasource.port}/${xyf.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${xyf.datasource.username}
+      password: ${xyf.datasource.password}
+
+  redis:
+    host: ${xyf.redis.host}
+    port: ${xyf.redis.port}
+    database: ${xyf.redis.database}
+
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xyf.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      xyf:
+        mapper: debug
+        service: info
+        controller: info
+
+xyf:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast
+    # 设置jwt过期时间
+    admin-ttl: 720000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: xyf
+    user-ttl: 720000000
+    user-token-name: authentication
+  alioss:
+    endpoint: ${xyf.alioss.endpoint}
+    access-key-id: ${xyf.alioss.access-key-id}
+    access-key-secret: ${xyf.alioss.access-key-secret}
+    bucket-name: ${xyf.alioss.bucket-name}
+
+  wechat:
+    appid: ${xyf.wechat.appid}
+    secret: ${xyf.wechat.secret}
+    user-secret-key: ${xyf.jwt.user-secret-key}
+    user-ttl: ${xyf.jwt.user-ttl}
