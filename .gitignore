@@ -1,0 +1,15 @@
+# Java后端忽略
+backend/target/
+backend/.idea/
+backend/*.iml
+backend/logs/
+backend/uploads/
+# Vue前端忽略
+frontend/node_modules/
+frontend/dist/
+frontend/.vscode/
+frontend/npm-debug.log
+# 通用
+*.class
+.DS_Store
+.env
