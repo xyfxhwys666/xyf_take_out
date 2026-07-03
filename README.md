@@ -111,7 +111,7 @@ xyf_take_out/
 
 ### 数据库配置
 1. 创建数据库 `xyf_take_out`
-2. 导入数据库初始化脚本（待补充）
+2. 导入数据库初始化脚本：`sql/xyf_take_out.sql`
 
 ### 后端配置
 修改 `backend/xyf-server/src/main/resources/application-dev.yml`：
